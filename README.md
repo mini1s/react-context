@@ -2,11 +2,9 @@
 
 -   AlertsContext - Manages alerts
 -   FirebaseAuthContext - Provides firebase's user object
--   MinHeightContext - Helps to prevent blank vertical space
+-   MinHeightContext - Helps prevent blank vertical space
 
 ### Installation
-
-Install the package with your preferred package manager:
 
 #### npm
 
@@ -22,11 +20,11 @@ yarn add @minisquare/react-context
 
 ## AlertsContext
 
-### Purpose:
+### Purpose
 
 The AlertsContext provides a global way to add, remove, and clear alert messages across the app.
 
-### API:
+### API
 
 The context exposes the following functions:
 
@@ -37,9 +35,9 @@ The context exposes the following functions:
 -   `clearAlerts(): void`
     Removes all alerts.
 
-### Example usage:
+### Example usage
 
-Wrap your app in the `AlertsProvider`:
+Wrap your app in the `AlertsProvider`.
 
 ```jsx
 import { AlertsProvider } from "@minisquare/react-context"
@@ -53,7 +51,7 @@ const App = () => {
 }
 ```
 
-Manage alerts with the `useAlerts` hook:
+Manage alerts with the `useAlerts` hook.
 
 ```jsx
 import { useAlerts } from "@minisquare/react-context"
@@ -86,11 +84,11 @@ const Form = () => {
 
 ### Purpose
 
-The FirebaseAuthContext provides a global instance of `user` so that `onAuthStateChanged` doesn't need to be called to get the current user in many places.
+The FirebaseAuthContext provides a global instance of `user` so that `onAuthStateChanged` is only called in one place.
 
 ### Example usage
 
-Wrap your app in the `FirebaseAuthProvider` and pass it the initialized Firebase `auth` instance:
+Wrap your app in the `FirebaseAuthProvider` and pass it the initialized Firebase `auth` instance.
 
 ```jsx
 import { initializeApp } from "firebase/app"
@@ -113,7 +111,7 @@ const App = () => {
 }
 ```
 
-Access the current Firebase user with the `useFirebaseAuth` hook:
+Access the current Firebase user with the `useFirebaseAuth` hook.
 
 ```jsx
 import { useFirebaseAuth } from "@minisquare/react-context"
@@ -128,3 +126,47 @@ const Profile = () => {
 ```
 
 ## MinHeightContext
+
+### Purpose
+
+The MinHeightContext provides `minHeight`. Pass `ids` to the provider and `minHeight` will equal the window height minus the height of the elements with those ids. Setting this as the `minHeight` of the page's main content will prevent blank vertical space below the footer.
+
+### Example usage
+
+Wrap your app in the `MinHeightProvider` and pass it the list of `ids`.
+
+```jsx
+import { MinHeightProvider } from "@minisquare/react-context"
+
+const App = () => {
+    return (
+        <MinHeightProvider ids={["header", "footer"]}>
+            <header id="header">
+                <p>Header content</p>
+            </header>
+
+            <YourContent />
+
+            <footer id="footer">
+                <p>Footer content</p>
+            </footer>
+        </MinHeightProvider>
+    )
+}
+```
+
+Use the hook to style the page's content.
+
+```jsx
+import { useMinHeight } from "@minisquare/react-context" 
+
+const Home = () => {
+    const { minHeight } = useMinHeight()
+
+    return (
+        <main className="home" style={{ minHeight }}>
+            <p>Home content</p>
+        </main>
+    )
+}
+```
