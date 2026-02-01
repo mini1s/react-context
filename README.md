@@ -35,6 +35,10 @@ The context exposes the following functions:
 -   `clearAlerts(): void`
     Removes all alerts.
 
+### Result
+
+![Screenshot of the alerts context in use](https://cdn.usq.re/jack/alerts.png)
+
 ### Example usage
 
 Wrap your app in the `AlertsProvider`.
