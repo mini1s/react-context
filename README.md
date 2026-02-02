@@ -135,6 +135,16 @@ const Profile = () => {
 
 The MinHeightContext provides `minHeight`. Pass `ids` to the provider and `minHeight` will equal the window height minus the height of the elements with those ids. Setting this as the `minHeight` of the page's main content will prevent blank vertical space below the footer.
 
+### Result
+
+Without min height context, the footer is not always at the bottom of the page:
+
+![Screenshot of a page without the min height context](https://cdn.usq.re/jack/min-height-without.png)
+
+With min height context, the footer is kept at the bottom of the page:
+
+![Screenshot of a page with the min height context](https://cdn.usq.re/jack/min-height-with.png)
+
 ### Example usage
 
 Wrap your app in the `MinHeightProvider` and pass it the list of `ids`.
@@ -172,5 +182,21 @@ const Home = () => {
             <p>Home content</p>
         </main>
     )
+}
+```
+
+### Styles
+
+The calculations will only work with certain css settings, such as below.
+
+```css
+* {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+p {
+    margin: 0;
 }
 ```
